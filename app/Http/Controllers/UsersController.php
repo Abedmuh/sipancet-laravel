@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\user;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -12,17 +14,14 @@ class UsersController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        
-    }
+    public function index() {}
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        
+        return (view('register'));
     }
 
     /**
@@ -30,33 +29,31 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate input data
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'role' => 'required|string',
-            'password' => 'required|string|min:8|confirmed',
+            'email' => 'required|string|email|max:255|unique:users,email',
+            'role' => 'nullable|string',
+            'password' => 'required|string|min:8',
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'errors' => $validator->errors(),
-            ], 422);
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
         }
-
-        // Create new user
+        $role = $request->role ?? 'regular';
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'role' => $request->role,
+            'role' => $role,
             'password' => Hash::make($request->password),
         ]);
+        return redirect('/login')->with('success', 'User successfully registered! Please log in.');
 
-        // Return response
-        return response()->json([
-            'message' => 'User successfully registered!',
-            'user' => $user,
-        ], 201);
+        // return response()->json([
+        //     'message' => 'User successfully registered!',
+        //     'user' => $user,
+        // ], 201);
     }
 
     /**
@@ -93,11 +90,24 @@ class UsersController extends Controller
 
     public function login(user $user)
     {
-        return(view('login'));
+        return (view('login'));
     }
 
-    public function register(user $user)
+    public function authenticate(Request $request): RedirectResponse
     {
-        return(view('register'));
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect()->intended('/')->with('success', 'Welcome');
+        }
+
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
     }
 }

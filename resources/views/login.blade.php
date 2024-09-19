@@ -16,11 +16,16 @@
                             <h3>Data Aset Inventaris</h3>
                             <h6>PT ASDP Indonesia Ferry (Persero)</h6>
                         </div>
-                        <form method="POST" action="" class="pt-3">
+                        <form method="POST" action="/login" class="pt-3">
+                            @csrf
                             <div class="form-group">
-                                <input type="email" name="email" class="form-control form-control-lg"
-                                    value="<?= isset($_POST['email']) ? $_POST['email'] : '' ?>" id="exampleInputEmail1"
-                                    placeholder="Email Address">
+                                <input type="email" name="email" class="form-control form-control-lg" value=""
+                                    id="exampleInputEmail1" placeholder="Email Address">
+                                @error('email')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <input type="password" name="password" class="form-control form-control-lg"

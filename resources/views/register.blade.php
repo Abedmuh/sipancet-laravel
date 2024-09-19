@@ -18,37 +18,68 @@
                         <div class="text-center mt-4 font-weight-light">
                             <h4>Buat Akun</h4>
                         </div>
-                        <form class="pt-3" method="POST">
+                        <form class="pt-3" method="POST" action="/register">
+                            @csrf
+                            <!-- Name Field -->
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-lg" id="inputUsername1"
-                                    placeholder="Username" name="username">
+                                <input type="text"
+                                    class="form-control form-control-lg @error('name') is-invalid @enderror"
+                                    id="inputUsername1" placeholder="Username" name="name" value="{{ old('name') }}">
+                                @error('name')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
+
+                            <!-- Email Field -->
                             <div class="form-group">
-                                <input type="email" class="form-control form-control-lg" id="inputEmail1"
-                                    placeholder="Email" name="email">
+                                <input type="email"
+                                    class="form-control form-control-lg @error('email') is-invalid @enderror"
+                                    id="inputEmail1" placeholder="Email" name="email" value="{{ old('email') }}">
+                                @error('email')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
+
+                            <!-- Password Field -->
                             <div class="form-group">
-                                <input type="password" class="form-control form-control-lg" id="inputPassword1"
-                                    name="password" placeholder="Password">
+                                <input type="password"
+                                    class="form-control form-control-lg @error('password') is-invalid @enderror"
+                                    id="inputPassword1" name="password" placeholder="Password">
+                                @error('password')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
+
+                            <!-- Terms and Conditions Checkbox -->
                             <div class="mb-4">
                                 <div class="form-check">
                                     <label class="form-check-label text-muted">
-                                        <input type="checkbox" class="form-check-input">
+                                        <input type="checkbox" class="form-check-input" name="terms" {{ old('terms')
+                                            ? 'checked' : '' }}>
                                         Saya setuju dengan Syarat & Ketentuan
                                     </label>
                                 </div>
                             </div>
+
+                            <!-- Submit Button -->
                             <div class="mt-3">
-                                <button name="btn_submit" type="submit"
-                                    class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">
+                                <button name="btn_submit" type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">
                                     Register Account
                                 </button>
                             </div>
+
+                            <!-- Login Link -->
                             <div class="text-center mt-4 font-weight-light">
                                 Sudah punya akun? <a href="/login" class="text-primary">Login</a>
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>

@@ -9,7 +9,8 @@ Route::get('/', function () {
 });
 
 Route::get('/login', [UsersController::class, 'login']);
-Route::get('/register', [UsersController::class, 'register']);
+Route::post('/login', [UsersController::class, 'authenticate']);
+Route::get('/register', [UsersController::class, 'create']);
 Route::post('/register', [UsersController::class, 'store']);
 
 Route::resource('penempatan', AssetsController::class);
