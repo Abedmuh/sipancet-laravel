@@ -65,13 +65,13 @@
                                 </span>
                             </div>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
-                            aria-labelledby="profileDropdown">
-                            <a class="dropdown-item" href="/login">
+                        <form method="POST" action="{{ route('logout') }}" class="dropdown-menu dropdown-menu-right navbar-dropdown"aria-labelledby="profileDropdown">
+                            @csrf
+                            <button class="dropdown-item" type="submit">
                                 <i class="ti-power-off text-primary"></i>
                                 Logout
-                            </a>
-                        </div>
+                            </button>
+                        </form>
                     </li>
                 </ul>
             </div>

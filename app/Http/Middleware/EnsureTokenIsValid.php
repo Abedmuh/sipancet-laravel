@@ -4,10 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class AuthMidleware
+class EnsureTokenIsValid
 {
     /**
      * Handle an incoming request.
@@ -16,10 +15,6 @@ class AuthMidleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check()) {
-            return redirect('/');
-        }else {
-            return $next($request);
-        }
+        return $next($request);
     }
 }
