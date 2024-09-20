@@ -5,7 +5,7 @@
 @section('content')
 <div class="card shadow overflow-hidden">
     <div class="card-body">
-        <h4 class="card-title"><i class="fa fa-fw fa-plus"></i>&nbsp; Input Data Penempatan</h4>
+        <h4 class="card-title"><i class="fa fa-fw fa-plus"></i>&nbsp; Edit Data Aset dengan kode {{$asset->kodeAsset}}</h4>
         <form class="form-sample" enctype="multipart/form-data" method="POST" action="/penempatan">
             @csrf
             <div class="row">

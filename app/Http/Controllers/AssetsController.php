@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Assets;
 use App\Http\Requests\StoreAssetsRequest;
 use App\Http\Requests\UpdateAssetsRequest;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Validator;
 
 class AssetsController extends Controller
@@ -14,7 +15,8 @@ class AssetsController extends Controller
      */
     public function index()
     {
-        return (view('assets.lihatdata'));
+        $assets = Assets::all();
+        return view('assets.lihatdata', compact('assets'));
     }
 
     /**
@@ -22,7 +24,7 @@ class AssetsController extends Controller
      */
     public function create()
     {
-        return (view('assets.inputdata', compact(Assets::all())));
+        return view('assets.inputdata');
     }
 
     /**
@@ -43,19 +45,29 @@ class AssetsController extends Controller
         $asset->status        = $request->input('status');
         $asset->pelabuhan     = $request->input('pelabuhan');
 
-        // Save the data to the database
+        if ($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $path = $file->storeAs('foto', $filename, 'public');
+            $asset->foto = $path;
+        }
+
         $asset->save();
 
-        // Optionally redirect or return a response
-        return redirect()->route('assets.lihatdata')->with('success', 'Asset successfully stored.');
+        return redirect()->route('/penempatan')->with('success', 'Asset successfully stored.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Assets $assets)
+    public function show($uuid)
     {
-        //show detail by id
+        $assets = Assets::where('uuid', $uuid)->first();
+
+        if (!$assets) {
+            return redirect()->route('assets.index')->with('error', 'Asset not found');
+        }
+        return view('assets.showdata', compact('assets'));
     }
 
     /**

@@ -46,7 +46,7 @@
                                 <a href="lupa_password.php" class="text-primary">Lupa password?</a>
                             </div>
                             <div class="text-center mt-4 font-weight-light">
-                                Belum memiliki akun? <a href="/" class="text-primary">Buat akun</a>
+                                Belum memiliki akun? <a href="/register" class="text-primary">Buat akun</a>
                             </div>
                         </form>
                     </div>

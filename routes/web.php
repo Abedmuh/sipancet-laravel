@@ -16,4 +16,3 @@ Route::get('/register', [UsersController::class, 'create']);
 Route::post('/register', [UsersController::class, 'store']);
 
 Route::resource('penempatan', AssetsController::class);
-

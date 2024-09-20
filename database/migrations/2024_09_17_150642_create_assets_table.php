@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('assets', function (Blueprint $table) {
-            $table->uuid();
+            $table->uuid('uuid')->primary();
             $table->string('noUrut');
             $table->string('namaBarang');
             $table->string('kodeAsset')->unique();
@@ -20,12 +20,14 @@ return new class extends Migration
             $table->string('kodeTelkom');
             $table->string('serialNumber')->nullable();
             $table->string('lokasi');
-            $table->string('keterangan');
+            $table->string('keterangan')->nullable();
             $table->string('kondisi');
             $table->string('status');
             $table->string('pelabuhan');
+            $table->string('foto')->nullable();
             $table->timestamps();
         });
+        
     }
 
     /**
