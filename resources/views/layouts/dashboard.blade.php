@@ -82,7 +82,7 @@
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="/">
                             <i class="ti-home menu-icon"></i>
                             <span class="menu-title">Dashboard</span>
                         </a>
@@ -96,8 +96,8 @@
                         </a>
                         <div class="collapse" id="form-elements">
                             <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"><a class="nav-link" href="#">Input Data</a> </li>
-                                <li class="nav-item"><a class="nav-link" href="#">Lihat Data</a> </li>
+                                <li class="nav-item"><a class="nav-link" href="/penempatan/create">Input Data</a> </li>
+                                <li class="nav-item"><a class="nav-link" href="/penempatan">Lihat Data</a> </li>
                                 <li class="nav-item"><a class="nav-link" href="#">Lihat Data Utuh</a> </li>
                             </ul>
                         </div>
@@ -132,7 +132,7 @@
 <script src="{{ asset('template/vendors/js/vendor.bundle.base.js') }}"></script>
 <!-- endinject -->
 <!-- Plugin js for this page -->
-<script src="{{ asset('template/vendors/typeahead.js') }}"></script>
+{{-- <script src="{{ asset('template/vendors/typeahead.js') }}"></script> --}}
 <script src="{{ asset('template/vendors/select2/select2.min.js') }}"></script>
 <script src="{{ asset('template/vendors/datatables.net/jquery.dataTables.js') }}"></script>
 <script src="{{ asset('template/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>

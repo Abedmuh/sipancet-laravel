@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Assets;
 use App\Http\Requests\StoreAssetsRequest;
 use App\Http\Requests\UpdateAssetsRequest;
+use Illuminate\Support\Facades\Validator;
 
 class AssetsController extends Controller
 {
@@ -13,7 +14,7 @@ class AssetsController extends Controller
      */
     public function index()
     {
-        return(view('assets.lihatdata'));
+        return (view('assets.lihatdata'));
     }
 
     /**
@@ -21,7 +22,7 @@ class AssetsController extends Controller
      */
     public function create()
     {
-        //
+        return (view('assets.inputdata', compact(Assets::all())));
     }
 
     /**
@@ -29,7 +30,24 @@ class AssetsController extends Controller
      */
     public function store(StoreAssetsRequest $request)
     {
-        //
+        $asset = new Assets();
+
+        $asset->namaBarang    = $request->input('namaBarang');
+        $asset->kodeAsset     = $request->input('kodeAsset');
+        $asset->qrCode        = $request->input('qrCode');
+        $asset->kodeTelkom    = $request->input('kodeTelkom');
+        $asset->serialNumber  = $request->input('serialNumber');
+        $asset->lokasi        = $request->input('lokasi');
+        $asset->keterangan    = $request->input('keterangan');
+        $asset->kondisi       = $request->input('kondisi');
+        $asset->status        = $request->input('status');
+        $asset->pelabuhan     = $request->input('pelabuhan');
+
+        // Save the data to the database
+        $asset->save();
+
+        // Optionally redirect or return a response
+        return redirect()->route('assets.lihatdata')->with('success', 'Asset successfully stored.');
     }
 
     /**
@@ -37,7 +55,7 @@ class AssetsController extends Controller
      */
     public function show(Assets $assets)
     {
-        //
+        //show detail by id
     }
 
     /**

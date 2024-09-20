@@ -13,17 +13,17 @@ return new class extends Migration
     {
         Schema::create('assets', function (Blueprint $table) {
             $table->uuid();
-            $table->string('namaBarang');
-            $table->integer('tahunPerolehan');
-            $table->integer('kategori');
-            $table->integer('grup');
-            $table->integer('kelas')->nullable();
-            $table->string('subKelas')->nullable();
             $table->string('noUrut');
+            $table->string('namaBarang');
             $table->string('kodeAsset')->unique();
             $table->string('qrCode');
             $table->string('kodeTelkom');
             $table->string('serialNumber')->nullable();
+            $table->string('lokasi');
+            $table->string('keterangan');
+            $table->string('kondisi');
+            $table->string('status');
+            $table->string('pelabuhan');
             $table->timestamps();
         });
     }
