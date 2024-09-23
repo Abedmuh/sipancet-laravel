@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Assets extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'uuid';
+    public $incrementing = false;
+    protected $table = 'assets';
 
     protected static function boot()
     {
@@ -17,10 +20,9 @@ class Assets extends Model
             if (empty($model->uuid)) {
                 $model->uuid = (string) \Illuminate\Support\Str::uuid();
             }
-            $latestNoUrut = static::max('noUrut'); // Get the current maximum value of noUrut
+            $latestNoUrut = static::max('noUrut'); 
             $model->noUrut = $latestNoUrut ? $latestNoUrut + 1 : 1; // Increment or start from 1
         });
-
 
     }
 

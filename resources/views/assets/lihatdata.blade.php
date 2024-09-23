@@ -46,7 +46,7 @@
                         <a href="{{ route('penempatan.show',$item->uuid) }}" title="Detail penempatan">
                             <i class="fas fa-fw fa-info-circle" style="font-size: 20px; padding: 5px;"></i>
                         </a>
-                        <a href="#" title="Ubah">
+                        <a href="{{ route('penempatan.edit',$item->uuid)}}" title="Ubah">
                             <i class="far fa-fw fa-edit" style="font-size: 20px; padding: 5px;"></i>
                         </a>
                         <a href="#" title="Hapus" onclick="hapus('{{ $item->id }}', '{{ $item->namaBarang }}')" class="text-danger">

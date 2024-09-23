@@ -6,7 +6,6 @@ use App\Models\Assets;
 use App\Http\Requests\StoreAssetsRequest;
 use App\Http\Requests\UpdateAssetsRequest;
 use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Validator;
 
 class AssetsController extends Controller
 {
@@ -73,24 +72,55 @@ class AssetsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Assets $assets)
+    public function edit($uuid)
     {
-        //
+        $aset = Assets::where('uuid', $uuid)->first();
+
+        if (!$aset) {
+            return redirect()->route('assets.index')->with('error', 'Asset not found');
+        }
+        return view('assets.editdata', compact('aset'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAssetsRequest $request, Assets $assets)
+    public function update(UpdateAssetsRequest $request, $uuid)
     {
-        //
+        $asset = Assets::where('uuid', $uuid)->first();
+
+        if (!$asset) {
+            return redirect()->route('assets.index')->with('error', 'Asset not found');
+        }
+
+        $asset->namaBarang    = $request->input('namaBarang');
+        $asset->qrCode        = $request->input('qrCode');
+        $asset->kodeTelkom    = $request->input('kodeTelkom');
+        $asset->serialNumber  = $request->input('serialNumber');
+        $asset->lokasi        = $request->input('lokasi');
+        $asset->keterangan    = $request->input('keterangan');
+        $asset->kondisi       = $request->input('kondisi');
+        $asset->status        = $request->input('status');
+        $asset->pelabuhan     = $request->input('pelabuhan');
+
+        $asset->save();
+
+        return redirect()->route('penempatan.index')->with('success', 'Asset successfully stored.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Assets $assets)
+    public function destroy($uuid)
     {
-        //
+        $assets = Assets::where('uuid', $uuid)->first();
+
+        if (!$assets) {
+            return redirect()->route('assets.index')->with('error', 'Asset not found');
+        }
+
+        $assets->delete();
+
+        return redirect()->route('assets.index')->with('success', 'Asset deleted successfully');
     }
 }

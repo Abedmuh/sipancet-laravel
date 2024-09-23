@@ -5,15 +5,17 @@
 @section('content')
 <div class="card shadow overflow-hidden">
     <div class="card-body">
-        <h4 class="card-title"><i class="fa fa-fw fa-plus"></i>&nbsp; Edit Data Aset dengan kode {{$asset->kodeAsset}}</h4>
-        <form class="form-sample" enctype="multipart/form-data" method="POST" action="/penempatan">
+        <h4 class="card-title"><i class="fa fa-fw fa-plus"></i>&nbsp; Edit Data Aset dengan kode {{$aset->kodeAsset}}</h4>
+        <form class="form-sample" enctype="multipart/form-data" method="POST" action="{{ route('penempatan.update', $aset->uuid) }}"
+            >
             @csrf
+            @method('PATCH')
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Nama Barang <span class="text-danger">*</span></label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="namaBarang" required value="" />
+                            <input type="text" class="form-control" name="namaBarang" required value="{{ $aset->namaBarang}}" />
                         </div>
                     </div>
                 </div>
@@ -21,7 +23,7 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Kode Asset <span class="text-danger">*</span></label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="kodeAsset" required value="" />
+                            <input type="text" class="form-control" name="kodeAsset" required value="{{ $aset->kodeAsset}}" readonly />
                         </div>
                     </div>
                 </div>
@@ -31,7 +33,7 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">QR Code <span class="text-danger">*</span></label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="qrCode" required value="" />
+                            <input type="text" class="form-control" name="qrCode" required value="{{ $aset->qrCode}}" />
                         </div>
                     </div>
                 </div>
@@ -39,7 +41,7 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Kode Telkom <span class="text-danger">*</span></label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="kodeTelkom" required value="" />
+                            <input type="text" class="form-control" name="kodeTelkom" required value="{{$aset->kodeTelkom}}" />
                         </div>
                     </div>
                 </div>
@@ -49,7 +51,7 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Serial Number</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="serialNumber" value="" />
+                            <input type="text" class="form-control" name="serialNumber" value="{{ $aset->serialNumber}}" />
                         </div>
                     </div>
                 </div>
@@ -57,7 +59,7 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Lokasi<span class="text-danger">*</span></label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="lokasi" required value="" />
+                            <input type="text" class="form-control" name="lokasi" required value="{{ $aset->lokasi}}" />
                         </div>
                     </div>
                 </div>
@@ -67,7 +69,7 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Keterangan</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="keterangan" value="" />
+                            <input type="text" class="form-control" name="keterangan" value="{{ $aset->keterangan}}" />
                         </div>
                     </div>
                 </div>
@@ -75,7 +77,7 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Kondisi<span class="text-danger">*</span></label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="kondisi" required value="" />
+                            <input type="text" class="form-control" name="kondisi" required value="{{ $aset->kondisi}}" />
                         </div>
                     </div>
                 </div>
@@ -85,7 +87,7 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Status<span class="text-danger">*</span></label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="status" required value="" />
+                            <input type="text" class="form-control" name="status" required value="{{ $aset->status}}" />
                         </div>
                     </div>
                 </div>
@@ -93,7 +95,7 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Pelabuhan<span class="text-danger">*</span></label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="pelabuhan" required value="" />
+                            <input type="text" class="form-control" name="pelabuhan" required value="{{ $aset->pelabuhan}}" />
                         </div>
                     </div>
                 </div>
