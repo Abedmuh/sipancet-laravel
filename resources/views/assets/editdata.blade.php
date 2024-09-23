@@ -6,8 +6,7 @@
 <div class="card shadow overflow-hidden">
     <div class="card-body">
         <h4 class="card-title"><i class="fa fa-fw fa-plus"></i>&nbsp; Edit Data Aset dengan kode {{$aset->kodeAsset}}</h4>
-        <form class="form-sample" enctype="multipart/form-data" method="POST" action="{{ route('penempatan.update', $aset->uuid) }}"
-            >
+        <form class="form-sample" enctype="multipart/form-data" method="POST" action="{{ route('penempatan.update', $aset->uuid) }}">
             @csrf
             @method('PATCH')
             <div class="row">

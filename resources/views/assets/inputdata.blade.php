@@ -6,8 +6,9 @@
 <div class="card shadow overflow-hidden">
     <div class="card-body">
         <h4 class="card-title"><i class="fa fa-fw fa-plus"></i>&nbsp; Input Data Penempatan</h4>
-        <form class="form-sample" enctype="multipart/form-data" method="POST" action="/penempatan">
+        <form class="form-sample" enctype="multipart/form-data" method="POST" action="{{ route('penempatan.store')}}">
             @csrf
+            @method('POST')
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group row">

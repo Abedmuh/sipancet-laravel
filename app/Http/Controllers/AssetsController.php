@@ -53,7 +53,7 @@ class AssetsController extends Controller
 
         $asset->save();
 
-        return redirect()->route('/penempatan')->with('success', 'Asset successfully stored.');
+        return redirect()->route('penempatan.index')->with('success', 'Asset successfully stored.');
     }
 
     /**
@@ -121,6 +121,6 @@ class AssetsController extends Controller
 
         $assets->delete();
 
-        return redirect()->route('assets.index')->with('success', 'Asset deleted successfully');
+        return redirect()->route('penempatan.index')->with('success', 'Asset deleted successfully');
     }
 }
