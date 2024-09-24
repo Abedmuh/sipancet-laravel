@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Assets;
 use App\Http\Requests\StoreAssetsRequest;
 use App\Http\Requests\UpdateAssetsRequest;
+use App\Utils\Export;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AssetsController extends Controller
 {
@@ -46,9 +48,9 @@ class AssetsController extends Controller
 
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
-            $filename = time() . '_' . $file->getClientOriginalName();
+            $filename = time() . '_' . $asset->kodeAsset . '.' . $file->getClientOriginalExtension();
             $path = $file->storeAs('foto', $filename, 'public');
-            $asset->foto = $path;
+            $asset->foto = $filename;
         }
 
         $asset->save();
@@ -119,8 +121,22 @@ class AssetsController extends Controller
             return redirect()->route('assets.index')->with('error', 'Asset not found');
         }
 
+        // Check if the asset has a file associated with it
+        if ($assets->foto) {
+            $filePath = 'foto/' . $assets->foto; 
+
+            if (Storage::disk('public')->exists($filePath)) {
+                Storage::disk('public')->delete($filePath);
+            }
+        }
         $assets->delete();
 
+
         return redirect()->route('penempatan.index')->with('success', 'Asset deleted successfully');
+    }
+
+    public function exportExcel()
+    {
+        return Export::exportToExcel();
     }
 }

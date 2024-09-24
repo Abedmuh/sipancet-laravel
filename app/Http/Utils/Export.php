@@ -6,10 +6,11 @@ use App\Models\Assets;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class Export
 {
-    public static function exportToPdf($data)
+    public static function exportToExcel()
     {
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
@@ -43,13 +44,17 @@ class Export
             $row++;
         }
 
-        // Save the file as Excel
-        $writer = new Xlsx($spreadsheet);
-        $fileName = 'assets_export.xlsx';
-        $filePath = storage_path($fileName);
+        // Stream the Excel file directly to the browser
+        $response = new StreamedResponse(function () use ($spreadsheet) {
+            $writer = new Xlsx($spreadsheet);
+            $writer->save('php://output'); // Stream directly to output
+        });
 
-        $writer->save($filePath);
+        // Set headers to prompt file download
+        $response->headers->set('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        $response->headers->set('Content-Disposition', 'attachment;filename="assets_export.xlsx"');
+        $response->headers->set('Cache-Control', 'max-age=0');
 
-        return response()->download($filePath)->deleteFileAfterSend(true);
+        return $response;
     }
 }

@@ -38,7 +38,7 @@
                         <td>{{ $item->lokasi }}</td>
                         <td>
                             @if ($item->foto)
-                            <img src="{{ asset($item->foto) }}" alt="Image" width="50">
+                            <img src="{{ asset('storage/foto/' . $item->foto) }}" alt="Image" style="width: 150px; height: auto; border-radius: 0;" class="d-block mx-auto">
                             @else
                             No Image
                             @endif

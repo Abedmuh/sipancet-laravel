@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-md-4 text-center">
                 @if ($assets->foto)
-                <img src="{{ asset($assets->foto)}}" alt="Foto penempatan" class="img-fluid"
+                <img src="{{ asset('storage/foto/' . $assets->foto)}}" alt="Foto penempatan" class="img-fluid"
                     style="width: 100%; max-width: 300px;">
                 @else
                 <p class="text-center">No Image Available</p>
