@@ -72,6 +72,7 @@
                                 Logout
                             </button>
                         </form>
+                        <a href="#" class="dropdown-menu dropdown-menu-right navbar-dropdown"aria-labelledby="profileDropdown">test</a>
                     </li>
                 </ul>
             </div>
