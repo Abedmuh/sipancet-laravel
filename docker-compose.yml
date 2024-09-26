@@ -13,7 +13,7 @@ services:
     depends_on:
       - db
     entrypoint: >
-      sh -c "php artisan migrate --force && php-fpm"
+      sh -c "php artisan migrate --force || true && php-fpm"
 
   webserver:
     image: nginx:stable-alpine-perl
