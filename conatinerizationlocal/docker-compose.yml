@@ -2,7 +2,9 @@ version: '3.8'
 
 services:
   app:
-    image: abdillah953/sipancet:1.0.0  # Pulling from Docker Hub
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: laravel_app
     restart: unless-stopped
     working_dir: /var/www
