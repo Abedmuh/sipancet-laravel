@@ -2,20 +2,16 @@ version: '3.8'
 
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: abdillah953/sipancet:2.1.1 
     container_name: laravel_app
     restart: unless-stopped
     working_dir: /var/www
-    volumes:
-      - ./:/var/www
     networks:
       - laravel
     depends_on:
       - db
     entrypoint: >
-      sh -c "php artisan migrate --force && php-fpm"
+      sh -c "php artisan migrate --force && php artisan storage:link || true && php-fpm"
 
   webserver:
     image: nginx:stable-alpine-perl
@@ -24,7 +20,6 @@ services:
     ports:
       - "8000:80"
     volumes:
-      - ./:/var/www
       - ./nginx/conf.d:/etc/nginx/conf.d
     networks:
       - laravel

@@ -22,11 +22,13 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Copy existing application directory contents
 COPY . /var/www
 
+RUN addgroup -S nginx && adduser -S nginx -G nginx
+
 # Set proper permissions
-RUN chown -R www-data:www-data /var/www
+RUN chown -R nginx:nginx /var/www
 
 # Set user
-USER www-data
+USER nginx
 
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000

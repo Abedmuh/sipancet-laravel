@@ -9,7 +9,7 @@
         <div class="d-inline-flex">
             <a href="{{ route('penempatan.create')}}" class="btn btn-primary btn-sm d-flex align-items-center"><i
                     class="fa fa-fw fa-plus"></i>&nbsp; Tambah</a>
-            <a href="export_penempatan.php" class="btn btn-primary btn-sm d-flex align-items-center ml-2"><i
+            <a href="{{ route('exportexcel')}}" class="btn btn-primary btn-sm d-flex align-items-center ml-2"><i
                     class="fa fa-fw fa-download"></i>&nbsp; Export</a>
             <a href="export_pdf.php" class="btn btn-primary btn-sm d-flex align-items-center ml-2"><i
                     class="fa fa-fw fa-download"></i>&nbsp; PDF</a>
