@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\user;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -90,7 +90,7 @@ class UsersController extends Controller
 
     public function login(user $user)
     {
-        return (view('login'));
+        return view('login');
     }
 
     public function authenticate(Request $request): RedirectResponse

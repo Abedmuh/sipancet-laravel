@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Repository\Export as RepositoryExport;
 use App\Models\Assets;
 use App\Http\Requests\StoreAssetsRequest;
 use App\Http\Requests\UpdateAssetsRequest;
@@ -137,6 +138,6 @@ class AssetsController extends Controller
 
     public function exportExcel()
     {
-        return Export::exportToExcel();
+        return RepositoryExport::exportToExcel();
     }
 }

@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   app:
-    image: abdillah953/sipancet:2.1.0  
+    image: abdillah953/sipancet:3.0.0
     container_name: laravel_app
     restart: unless-stopped
     working_dir: /var/www
@@ -10,8 +10,10 @@ services:
       - laravel
     depends_on:
       - db
+    volumes:
+      - public:/var/www/public
     entrypoint: >
-      sh -c "php artisan migrate --force && php artisan storage:link || true && php-fpm"
+      sh -c "sleep 20 && php artisan migrate --force && php artisan storage:link || true && php-fpm"
 
   webserver:
     image: nginx:stable-alpine-perl
@@ -20,7 +22,7 @@ services:
     ports:
       - "8000:80"
     volumes:
-      - app:/var/www
+      - public:/var/www/public
       - ./nginx/conf.d:/etc/nginx/conf.d
     networks:
       - laravel
@@ -44,4 +46,4 @@ networks:
 
 volumes:
   dbdata:
-  app:
+  public:

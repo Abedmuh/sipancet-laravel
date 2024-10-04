@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Utils;
+namespace App\Http\Repository;
 
 use App\Models\Assets;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
@@ -26,7 +25,7 @@ class Export
         $sheet->setCellValue('I1', 'Status');
         $sheet->setCellValue('J1', 'Pelabuhan');
 
-        $assets = Assets::all(); // Replace 'Asset' with your actual model and table name if different
+        $assets = Assets::all();
 
         // Populate data rows
         $row = 2; // Start from the second row
