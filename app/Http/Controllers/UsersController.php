@@ -90,7 +90,7 @@ class UsersController extends Controller
 
     public function login(user $user)
     {
-        return (view('login'));
+        return view('login');
     }
 
     public function authenticate(Request $request): RedirectResponse
